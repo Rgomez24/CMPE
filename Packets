@@ -1,0 +1,76 @@
+import pickle
+
+class packet():
+  """
+  Class to hold the data from a single network packet.
+  """
+
+  def __init__(self):
+    """
+    Constructor sets default values for data members
+    """
+    self.source_ip = ""
+    self.source_port = ""
+    self.destination_ip = ""
+    self.destination_port = ""
+    self.payload = ""
+  
+def load_packet_data():
+  """
+  Loads the packet sniffer data as a list of packet objects
+  """
+  f = open("cyber_lab.pkl", 'rb')
+  packets = pickle.load(f)
+  f.close()
+
+  return packets
+
+def show_packet(pkt):
+  """
+  Simple function to view a packet, useful for debugging.
+  """
+  print( "Source IP: " + pkt.source_ip)
+  print( "Source port: " + pkt.source_port)
+  print( "Destination IP: " + pkt.destination_ip)
+  print( "Destinations port: " + pkt.destination_port)
+  print( "Packet Payload: " + pkt.payload)
+
+def list_packets(packets):
+  ip_list = []
+  for packet in packets:
+    if packet.source_ip not in ip_list:
+      ip_list.append(packet.source_ip)
+
+  return ip_list 
+
+def main():
+  """
+  Example of looking at a packet, work from here
+  """
+  packets = load_packet_data()
+  
+  print("Unique Packets:", list_packets(packets))
+  print("Read in {} packets".format(len(packets)))
+
+  print("First packet:")
+  print(packets[0].source_ip)
+
+  show_packet(packets[0])
+  '''
+  for p in packets:
+    if len(p.payload) > 50:
+      show_packet(p)
+      break
+  '''
+  ip = '10.3.0.12'
+  
+  for p in packets:
+    if p.source_ip == ip:
+      if len(p.payload) > 50: 
+        show_packet(p)
+
+    '''
+if p.payload.find("HTTP") != -1:
+  '''
+      
+main()
