@@ -1,0 +1,48 @@
+from simplewin import simplewin
+import winsound
+
+
+def quits():
+    print("Goodbye!")
+    win.quit()
+
+
+# create a new window object
+win = simplewin()
+
+#When calling into a function use Win
+
+#This will add a text into the window
+win.add_label('hey')
+
+def example_callback():
+	print("I have been called…back")
+
+win.add_button("Test Button", example_callback)
+win.add_button("Quit Program", quits)
+
+
+winsound.PlaySound("C.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
+'''
+winsound.PlaySound("D.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
+winsound.PlaySound("E.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
+'''
+
+def key_down(event):
+    if 'a' == event.keysym:
+        winsound.PlaySound("C.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
+    elif 's' == event.keysym:
+        winsound.PlaySound("D.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
+    elif 'd' == event.keysym:
+        winsound.PlaySound("E.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
+    else:
+        print("Warning! {} has been pressed!".format(event.keysym))
+       
+
+win.add_key_handler(key_down)
+
+
+# and give it control
+win.run()
+
+
