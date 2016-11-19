@@ -1,0 +1,65 @@
+from simplewin import simplewin
+import winsound
+
+
+nl = []
+class piano:
+    def __init__(self):
+        self.nl = []
+        self.nl.append('C.wav')
+        self.nl.append('Cs.wav')
+        self.nl.append('D.wav')
+        self.nl.append('Ds.wav')
+        self.nl.append('E.wav')
+        self.nl.append('F.wav')
+        self.nl.append('Fs.wav')
+        self.nl.append('G.wav')
+        self.nl.append('Gs.wv')
+        self.nl.append('A.wav')
+        self.nl.append('As.wav')
+        self.nl.append('B.wav')
+        self.nl.append('C2.wav')
+        
+
+
+class app:
+    def __init__(self):
+        # the special keyword “None” indicates no object
+        self.win = None
+
+    def run(self):
+        self.win = simplewin()
+
+        self.win.add_label("My Piano")
+        self.win.add_button("Quit", self.quit_program)
+
+        self.win.add_key_handler(self.key_down)
+
+        self.win.run()
+
+    def key_down(self, event):
+           p = piano()
+           notes = {    'a' : 0,
+                              'w' : 1,
+                              's' : 2,
+                              'e' : 3,
+                              'd' : 4,
+                              'f' : 5,
+                              't' : 6,
+                              'g' : 7,
+                              'y' : 8,
+                              'h' : 9,
+                              'u' : 10,
+                              'j' : 11,
+                              'k' : 12,
+                                    }
+           p.notes[notes[event.keysym]].winsound.PlaySound(winsound.SND_FILENAME | winsound.SND_ASYNC)
+
+
+    def quit_program(self):
+        print("Goodbye!")
+        self.win.quit()
+
+app = app()
+app.run()
+
