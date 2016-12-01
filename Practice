@@ -1,0 +1,20 @@
+class contact:
+  def __init__(self, fname, lname, number, ntype)
+     self.f_name = fname
+     self.l_name = lname
+     self.number = number
+     self.type = ntype
+  
+  def print_contact(contact):
+     print("{} {}".format(contact.f_name, contact.l_name))
+     print("{} {}".format(contact.number, contact.ntype))
+  
+  def same_number(c1, c2):
+     return cl.number == c2.number
+     
+  def main():
+     ca = contact("Emmett", "Tomai", "956-555-555", "work")
+     cb = contact("Emmett", "Tomai", "956-555-555", "work")
+     cc = contact("Emmett", "Tomai", "956-555-455", "work")
+     
+main()
