@@ -17,4 +17,7 @@ class contact:
      cb = contact("Emmett", "Tomai", "956-555-555", "work")
      cc = contact("Emmett", "Tomai", "956-555-455", "work")
      
+     
+     r = [c.fname for c in [ca, cb, cc]]
+     
 main()
