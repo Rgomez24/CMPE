@@ -1,0 +1,14 @@
+class Movie:
+    def __init__(self, year, title, rating, ratingCount):
+        self.year = year
+        self.title = title
+        self.rating = rating
+        self.ratingCount = ratingCount
+
+    def __str__(self):
+        return "{},{},{},{}".format(self.year, self.title, self.rating, self.ratingCount)
+
+def main():
+    T = Movie(2016, "The Terrifying Python", 5.0, 1045)
+    print(T)
+main()
