@@ -1,0 +1,37 @@
+class Color:
+    def __init__(self, R, G, B):
+        self.R = R
+        self.G = G
+        self.B = B
+#1
+    def __str__(self):
+        return "{},{},{}".format(self.R, self.G, self.B)
+
+def main():
+    color = Color(240, 46, 150)
+    print(color)
+main()
+#2
+
+
+def fn(list_color):
+    for i in range(len(list_color)):
+        list_color[i].R = 0
+    return list_color
+
+
+LI = [Color(250,30,40), Color(127,122,4), Color(2,30,40)]
+L = fn(LI)
+for c in L:
+    print(c)
+
+#3
+
+def Fn2(c1, c2, n):
+    r1 = (c1.R * n) + (c2.R * (1-n))
+    g1 = (c1.G * n) + (c2.G * (1-n))
+    b1 = (c1.B * n) + (c2.B * (1-n))
+    Ncolor = Color(r1, g1, b1)
+    return Ncolor
+
+print(Fn2(Color(39,53,89), Color(58,210,157), 0.34))
