@@ -1,0 +1,105 @@
+from simplewin import simplewin
+import winsound
+
+
+nl = []
+class piano:
+    nl = []
+    def __init__(self):
+        nl = []
+        self.nl.append('C.wav')
+        self.nl.append('Cs.wav')
+        self.nl.append('D.wav')
+        self.nl.append('Ds.wav')
+        self.nl.append('E.wav')
+        self.nl.append('F.wav')
+        self.nl.append('Fs.wav')
+        self.nl.append('G.wav')
+        self.nl.append('Gs.wv')
+        self.nl.append('A.wav')
+        self.nl.append('As.wav')
+        self.nl.append('B.wav')
+        self.nl.append('C2.wav')
+        
+
+
+class app:
+    def __init__(self):
+        # the special keyword “None” indicates no object
+        self.win = None
+#This creates the window and its buttons.
+    def run(self):
+        self.win = simplewin()
+
+        self.win.add_label("My Piano")
+        self.win.add_button("Record", self.begin_recording)
+        self.win.add_button("Quit", self.quit_program)
+
+        self.win.add_key_handler(self.key_down)
+
+        self.win.run()
+        p = piano()
+        
+
+    def key_down(self, event):
+            p = piano()
+            notes = {   'a' : 0,
+                              'w' : 1,
+                              's' : 2,
+                              'e' : 3,
+                              'd' : 4,
+                              'f' : 5,
+                              't' : 6,
+                              'g' : 7,
+                              'y' : 8,
+                              'h' : 9,
+                              'u' : 10,
+                              'j' : 11,
+                              'k' : 12,
+                                    }
+            winsound.PlaySound(p.nl[notes[event.keysym]],winsound.SND_FILENAME | winsound.SND_ASYNC)
+
+
+
+    def quit_program(self):
+        print("Goodbye!")
+        self.win.quit()
+        
+    def begin_recording(self):
+        print("Recording...")
+        self.win.run()
+        
+app = app()
+app.run()
+
+
+"""
+recorder class with stub methods. Note that "pass" must be used for empty function bodies,
+will be removed when you put real code in.
+"""
+
+class recorder:
+  def __init__(self):
+      
+        
+      
+    """
+    Default constructor, going to need some way to store notes.
+    """
+    self.notes = []
+
+  def record_key(self, key_index):
+
+      
+    """
+    Method to record that a particular key (by index) was struck.
+    """
+    pass
+
+
+
+  def playback(self, piano):
+    """
+    Method to play back the stored notes using the given piano.
+    """
+    pass
