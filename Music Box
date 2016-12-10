@@ -1,6 +1,6 @@
 from simplewin import simplewin
 import winsound
-
+import time
 
 nl = []
 class piano:
@@ -20,27 +20,75 @@ class piano:
         self.nl.append('As.wav')
         self.nl.append('B.wav')
         self.nl.append('C2.wav')
+
         
+class SaveFile:
+    def __init__(self):
+        self.F = name
+
+    def save(self):
+        file.open(Recording, '.txt', 'w')
 
 
+
+
+
+
+        
+#Recorder Class
+class recorder:
+  def __init__(self):
+    """
+    Default constructor, going to need some way to store notes.
+    """
+    self.notesl = []
+
+#Record the pressed keys
+  def record_key(self, key_index):
+    self.notesl.append(key_index)
+    print(self.notesl)
+    """
+    Method to record that a particular key (by index) was struck.
+    """
+
+
+#Playback the recorded keys
+  def playback(self, piano):
+    for note in self.notesl:
+        winsound.PlaySound(piano.nl[note], winsound.SND_FILENAME | winsound.SND_ASYNC)
+        time.sleep(0.35)
+    """
+    Method to play back the stored notes using the given piano.
+    """ 
+
+#App class
 class app:
     def __init__(self):
         # the special keyword “None” indicates no object
         self.win = None
+        self.recorder = None
+        self.p = piano()
+        
 #This creates the window and its buttons.
     def run(self):
         self.win = simplewin()
 
         self.win.add_label("My Piano")
         self.win.add_button("Record", self.begin_recording)
+        self.win.add_button("PlayBack", self.callPlayback)
+        self.win.add_button("Write Current Song", self.begin_recording)
+        self.win.add_button("Play Current Song", self.callPlayback)
         self.win.add_button("Quit", self.quit_program)
 
         self.win.add_key_handler(self.key_down)
 
         self.win.run()
-        p = piano()
-        
+        self.p = piano()
 
+    def callPlayback(self):
+        self.recorder.playback(self.p)
+        
+#Dictionary of the keys and sounds
     def key_down(self, event):
             p = piano()
             notes = {   'a' : 0,
@@ -57,49 +105,24 @@ class app:
                               'j' : 11,
                               'k' : 12,
                                     }
-            winsound.PlaySound(p.nl[notes[event.keysym]],winsound.SND_FILENAME | winsound.SND_ASYNC)
+            
 
+            if event.keysym in notes:
+                if not(self.recorder == None):
+                   self.recorder.record_key(notes[event.keysym])
+                notes[event.keysym]
+                winsound.PlaySound(p.nl[notes[event.keysym]],winsound.SND_FILENAME | winsound.SND_ASYNC)
 
-
+#Quit Program key
     def quit_program(self):
         print("Goodbye!")
         self.win.quit()
-        
+#Begin recording button        
     def begin_recording(self):
+        self.recorder = recorder()
         print("Recording...")
         self.win.run()
-        
+#Runs the APP        
 app = app()
 app.run()
 
-
-"""
-recorder class with stub methods. Note that "pass" must be used for empty function bodies,
-will be removed when you put real code in.
-"""
-
-class recorder:
-  def __init__(self):
-      
-        
-      
-    """
-    Default constructor, going to need some way to store notes.
-    """
-    self.notes = []
-
-  def record_key(self, key_index):
-
-      
-    """
-    Method to record that a particular key (by index) was struck.
-    """
-    pass
-
-
-
-  def playback(self, piano):
-    """
-    Method to play back the stored notes using the given piano.
-    """
-    pass
